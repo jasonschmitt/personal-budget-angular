@@ -78,23 +78,21 @@
             </article>
             <!-- This is an A11y Change -->
             <article class="text-box">
-                <h1>Alerts</h1>
+                <h1>D3JS Chart</h1>
                 <p>
-                    What if your clothing budget ended? You will get an alert. The goal is to never go over the budget.
+                    <div id="chart"></div>
                 </p>
             </article>
             <!-- This is an A11y Change -->
             <article class="text-box">
-                <h1>Results</h1>
+                <h1>Another h1 with text</h1>
                 <p>
-                    People who stick to a financial plan, budgeting every expense, get out of debt faster!
-                    Also, they to live happier lives... since they expend without guilt or fear... 
-                    because they know it is all good and accounted for.
+                    Some very important information
                 </p>
             </article>
             <!-- This is an A11y Change -->
             <article class="text-box">
-                <h1>Chart</h1>
+                <h1>ChartJS Chart</h1>
                 <p>
                     <canvas id="myChart" width="400" height="400"></canvas>
                 </p>
@@ -113,6 +111,8 @@
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/0.20.0/axios.min.js" integrity="sha512-quHCp3WbBNkwLfYUMd+KwBAgpVukJu5MncuQaWXgCrfgcxCJAq/fo+oqrRKOj+UKEmyMCG3tb8RB63W+EmrOBg==" crossorigin="anonymous"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.3/Chart.min.js" integrity="sha512-s+xg36jbIujB2S2VKfpGmlC3T5V2TF3lY48DX7u2r9XzGzgPsa6wTpOQA7J9iffvdeBN0q9tKzRxVxw1JviZPg==" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/d3/4.13.0/d3.min.js" integrity="sha512-RJJ1NNC88QhN7dwpCY8rm/6OxI+YdQP48DrLGe/eSAd+n+s1PXwQkkpzzAgoJe4cZFW2GALQoxox61gSY2yQfg==" crossorigin="anonymous"></script>
+    <!-- chartjs javascript example -->
     <script>
         var dataSource = {
             datasets: [{
@@ -159,6 +159,92 @@
             })
         }
         getBudget();
+    </script>
+    <!-- d3js javascript example -->
+    <script>
+        axios.get('/budget')
+        .then(function(res) {
+            // console.log(res.data);
+            var data = res.data.myBudget;
+            var text = "";
+
+            var width = 200;
+            var height = 200;
+            var thickness = 20;
+            var duration = 750;
+
+            var radius = Math.min(width, height) / 2;
+            var color = d3.scaleOrdinal(d3.schemeCategory10);
+
+            var svg = d3.select("#chart")
+            .append('svg')
+            .attr('class', 'pie')
+            .attr('width', width)
+            .attr('height', height);
+
+            var g = svg.append('g')
+            .attr('transform', 'translate(' + (width/2) + ',' + (height/2) + ')');
+
+            var arc = d3.arc()
+            .innerRadius(radius - thickness)
+            .outerRadius(radius);
+
+            var pie = d3.pie()
+            .value(function(d) { return d.budget; })
+            .sort(null);
+
+            var path = g.selectAll('path')
+            .data(pie(data))
+            .enter()
+            .append("g")
+            .on("mouseover", function(d) {
+                console.log(d);
+                let g = d3.select(this)
+                    .style("cursor", "pointer")
+                    .style("fill", "black")
+                    .append("g")
+                    .attr("class", "text-group");
+
+                g.append("text")
+                    .attr("class", "title-text")
+                    .text(`${d.data.title}`)
+                    .attr('text-anchor', 'middle')
+                    .attr('dy', '-1.2em');
+            
+                g.append("text")
+                    .attr("class", "budget-text")
+                    .text(`${d.data.budget}`)
+                    .attr('text-anchor', 'middle')
+                    .attr('dy', '.6em');
+                })
+            .on("mouseout", function(d) {
+                d3.select(this)
+                    .style("cursor", "none")  
+                    .style("fill", color(this._current))
+                    .select(".text-group").remove();
+                })
+            .append('path')
+            .attr('d', arc)
+            .attr('fill', (d,i) => color(i))
+            .on("mouseover", function(d) {
+                d3.select(this)     
+                    .style("cursor", "pointer")
+                    .style("fill", "black");
+                })
+            .on("mouseout", function(d) {
+                d3.select(this)
+                    .style("cursor", "none")  
+                    .style("fill", color(this._current));
+                })
+            .each(function(d, i) { this._current = i; });
+
+
+            g.append('text')
+            .attr('text-anchor', 'middle')
+            .attr('dy', '.35em')
+            .text(text);
+        })
+
     </script>
 </body>
 </html>
