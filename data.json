@@ -1,0 +1,34 @@
+{
+  "myBudget": [
+  {
+    "title": "Eat out",
+    "budget": 30
+  }, {
+    "title": "Rent",
+    "budget": 350
+  }, {
+    "title": "Groceries",
+    "budget": 90
+  }, {
+    "title": "Parties",
+    "budget": 40
+  }, {
+    "title": "Automobile",
+    "budget": 70
+  }, {
+    "title": "Family outings",
+    "budget": 100
+  }, {
+    "title": "Clothing",
+    "budget": 30
+  }, {
+    "title": "Video games",
+    "budget": 35
+  }, {
+    "title": "Sport events",
+    "budget": 50
+  }, {
+    "title": "Concerts",
+    "budget": 90
+  }
+]}
