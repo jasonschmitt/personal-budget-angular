@@ -1,10 +1,10 @@
 const express = require("express");
+const cors = require("cors");
 const app = express();
 const port = 3000;
 const myBudgetData = require('./data.json');
 
-
-app.use('/', express.static('public'));
+app.use(cors());
 
 app.get('/hello', (req, res) => {
   res.send('hello world');
