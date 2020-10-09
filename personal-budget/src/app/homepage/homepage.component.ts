@@ -12,7 +12,7 @@ export class HomepageComponent implements AfterViewInit {
 
   public dataSource = {
     datasets: [{
-        data: [10, 20, 30],
+        data: [],
         backgroundColor: [
             '#ffcd56',
             '#ff6384',
@@ -28,11 +28,7 @@ export class HomepageComponent implements AfterViewInit {
     }],
 
     // These labels appear in the legend and in the tooltips when hovering different arcs
-    labels: [
-        'Eat out',
-        'Rent',
-        'Groceries'
-    ]
+    labels: []
   }
 
   constructor(public data: DataService) {
@@ -62,7 +58,7 @@ export class HomepageComponent implements AfterViewInit {
 
   // chart for chartjs
   createChart() {
-    // console.log(this.dataSource);
+    console.log(this.dataSource);
     var ctx = document.getElementById("myChart");
     var myPieChart = new Chart(ctx, {
         type: 'pie',
