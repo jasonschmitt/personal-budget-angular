@@ -357,36 +357,6 @@ body {
   font-family: Tahoma, Arial;
 }
 
-nav.menu {
-  width: 100%;
-  background-color: #4d5791;
-  height: 44px;
-  padding: 0 40px;
-}
-
-nav.menu ul,
-nav.menu ul li {
-  margin: 0;
-  padding: 0 ;
-  list-style: none;
-  display: inline-block;
-}
-
-nav.menu ul li a {
-  display: block;
-  padding: 0 20px;
-  line-height: 44px;
-  font-size: 1.4em;
-  text-decoration: none;
-  color: #fff;
-  margin: 0;
-}
-
-nav.menu ul li a:hover  {
-  background-color: white;
-  color: #4d5791;
-}
-
 section.hero {
   height: 350px;
   background-color: #b4c6f0;
@@ -421,6 +391,14 @@ section.hero h2 {
 .page-area {
   max-width: 768px;
   display: inline-block;
+}
+
+.container article {
+  display: inline-block;
+  width: 100%;
+  max-width: 340px;
+  text-align: justify;
+  margin: 20px;
 }
 
 .bottom {
