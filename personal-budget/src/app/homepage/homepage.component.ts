@@ -44,6 +44,7 @@ export class HomepageComponent implements AfterViewInit {
     // console.log(this.data);
     var myData = this.data.data;
     // console.log(myData);
+    // console.log(this.dataSource);
     for(var i = 0; i < myData.myBudget.length; i++) {
       // console.log(this.dataSource.datasets[0].data[i]);
       // console.log(res.myBudget[i]);
@@ -52,7 +53,6 @@ export class HomepageComponent implements AfterViewInit {
       // console.log(res.myBudget[i].title);
       this.dataSource.labels[i] = myData.myBudget[i].title;
     }
-
     // create chart.js chart
     this.createChart();
 
@@ -73,17 +73,7 @@ export class HomepageComponent implements AfterViewInit {
   // chart for d3js
   createD3Chart() {
     // console.log(this.dataSource);
-    var data = [];
-
-    for(var i = 0; i < this.dataSource.datasets[0].data.length; i++) {
-      var budgetToAdd = this.dataSource.datasets[0].data[i];
-      var titleToAdd = this.dataSource.labels[i];
-      var obj = {
-        budget: budgetToAdd,
-        title: titleToAdd
-      }
-      data.push(obj);
-    }
+    var data = this.data.data.myBudget;
     // console.log(data);
     var text = "";
 
